@@ -32,6 +32,13 @@ describe(`GET ${BASE_PATH}/:id`, () => {
     expect(res.statusCode).toBe(404);
     expect(res.body).toMatchObject({});
   });
+  it("Should return 401 if there's no profile_id", async () => {
+    const contractId = 1;
+
+    const res = await request(app).get(`${BASE_PATH}/${contractId}`);
+
+    expect(res.statusCode).toBe(401);
+  });
 });
 
 describe(`GET ${BASE_PATH}`, () => {

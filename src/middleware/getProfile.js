@@ -3,6 +3,8 @@ const getProfile = async (req, res, next) => {
 
   const profile_id = req.get("profile_id");
 
+  if (profile_id === undefined) return res.status(401).end();
+
   const profile = await Profile.findOne({
     where: { id: profile_id },
   });
