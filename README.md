@@ -96,3 +96,7 @@ It would be great for example if you'd write some unit test / simple frontend de
 When you have finished the assignment, create a github repository and send us the link.
 
 Thank you and good luck! 🙏
+
+## Assumptions
+
+- If the profileId in `/contracts/:id` doesn't match the contracts associated profile, we return 404.
