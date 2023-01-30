@@ -66,4 +66,9 @@ describe(`GET ${BASE_PATH}`, () => {
     expect(res.statusCode).toBe(200);
     expect(res.body).toHaveLength(0);
   });
+  it("Should return 401 if there's no profile_id", async () => {
+    const res = await request(app).get(`${BASE_PATH}`);
+
+    expect(res.statusCode).toBe(401);
+  });
 });
