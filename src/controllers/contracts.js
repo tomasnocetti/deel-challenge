@@ -1,10 +1,5 @@
 const { Op } = require("sequelize");
-
-const CONTRACT_STATUS = {
-  TERMINATED: "terminated",
-  IN_PROGRESS: "in_progress",
-  NEW: "new",
-};
+const { CONTRACT_STATUS } = require("../constants");
 
 const getContract = async (req, res) => {
   const { Contract } = req.app.get("models");

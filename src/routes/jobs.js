@@ -3,6 +3,6 @@ const router = express.Router();
 
 const { JobsController } = require("../controllers");
 
-router.get("/", JobsController.get);
+router.get("/unpaid", JobsController.getUnpaidJobs);
 
 module.exports = router;

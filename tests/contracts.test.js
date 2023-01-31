@@ -1,13 +1,8 @@
 const request = require("supertest");
 const app = require("../src/app");
+const { CONTRACT_STATUS } = require("../src/constants");
 
 const BASE_PATH = "/contracts";
-
-const CONTRACT_STATUS = {
-  TERMINATED: "terminated",
-  IN_PROGRESS: "in_progress",
-  NEW: "new",
-};
 
 describe(`GET ${BASE_PATH}/:id`, () => {
   it("Should return a contract if the user.id is ClientId", async () => {
