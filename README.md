@@ -97,16 +97,39 @@ When you have finished the assignment, create a github repository and send us th
 
 Thank you and good luck! 🙏
 
+# Resolution
+
+## Tests
+
+Tests serve as documentation for this endpoints, a whole suite of tests have been created and can be executed with:
+
+```
+npm run test
+```
+
+Tests are located under `/tests` folder.
+
 ## Assumptions
 
 - If the profileId in `/contracts/:id` doesn't match the contracts associated profile, we return 404.
+- For both **_GET_** `/jobs/unpaid` and **_POST_** `/jobs/:job_id/pay` the user is taken from getProfile middleware.
 - In the operation **_POST_** `/balances/deposit/:userId`, the deposit action is considered when calling the endpoint, there's no restriction over the total balance of the client. Also a payload definition needs to be sent with the amount to deposit. Eg:
 
 ```
+POST /balances/deposit/1
 {
     amount: 200
 }
 ```
 
 - A new endpoint **_GET_** `/balance/:userId` has been created to get the balance of a user.
-- I have kept the payload structure requested by the problem, but there is no validation for the `/balance` endpoints for which user is depositing. The user is specified in the url.
+- I have kept the payload structure requested by the problem, but there is no validation for the `/balance/deposit/:userId` endpoint for which user is depositing. The user is specified in the url. For security the user should be validated.
+
+## Future Improvements
+
+- A test-db should be implemented only for running tests due to the fact that tests re-create the database when needed to have a deterministic behaviour. Also it would be nice to dockerize the server in a way to create needed assets on container start-up.
+- A correct production-logging library should be implemented.
+- For certain endpoints transactions have been used, it would be nice to add concurrent tests to check against race conditions, specially for pay/deposit endpoints.
+- For production software it would be nice to implement clustering.
+- Adding Swagger style documentation would be a really nice-to have for this project.
+- Some validations have been created, and some are missing. There were no requirements on validations so this was up to the programmer to decide.
