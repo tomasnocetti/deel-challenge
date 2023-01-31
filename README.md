@@ -100,3 +100,13 @@ Thank you and good luck! 🙏
 ## Assumptions
 
 - If the profileId in `/contracts/:id` doesn't match the contracts associated profile, we return 404.
+- In the operation **_POST_** `/balances/deposit/:userId`, the deposit action is considered when calling the endpoint, there's no restriction over the total balance of the client. Also a payload definition needs to be sent with the amount to deposit. Eg:
+
+```
+{
+    amount: 200
+}
+```
+
+- A new endpoint **_GET_** `/balance/:userId` has been created to get the balance of a user.
+- I have kept the payload structure requested by the problem, but there is no validation for the `/balance` endpoints for which user is depositing. The user is specified in the url.
