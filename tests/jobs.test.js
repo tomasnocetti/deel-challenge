@@ -4,6 +4,11 @@ const app = require("../src/app");
 const BASE_PATH = "/jobs";
 
 describe(`GET ${BASE_PATH}/unpaid`, () => {
+  it("Should return 401 if there's no profile_id", async () => {
+    const res = await request(app).get(`${BASE_PATH}/unpaid`);
+
+    expect(res.statusCode).toBe(401);
+  });
   it("Should return all unpaid jobs for a given Profile with unpaid jobs as Client", async () => {
     const profileId = 1;
     const res = await request(app).get(`${BASE_PATH}/unpaid`).set({
