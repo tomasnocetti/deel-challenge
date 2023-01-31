@@ -8,7 +8,7 @@ beforeAll(async () => {
   await seed();
 });
 
-xdescribe(`GET ${BASE_PATH}/:user_id`, () => {
+describe(`GET ${BASE_PATH}/:user_id`, () => {
   it("Should return the balance for a given user", async () => {
     const profileId = 1;
     const res = await request(app).get(`${BASE_PATH}/1`).set({
