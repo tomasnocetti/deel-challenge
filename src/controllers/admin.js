@@ -62,6 +62,72 @@ const getBestProfession = async (req, res) => {
   }
 };
 
+const getBestClients = async (req, res) => {
+  try {
+    const { Profile, Job, Contract } = req.app.get("models");
+    const sequelize = req.app.get("sequelize");
+
+    const { start_date, end_date, limit } = req.query;
+
+    const parsedStartDate = parse(start_date, DATE_FORMAT, new Date());
+    const parsedEndDate = parse(end_date, DATE_FORMAT, new Date());
+
+    if (!isValid(parsedStartDate)) {
+      return res.status(400).send({
+        error: `INVALID_START_DATE Format ${DATE_FORMAT}`,
+      });
+    }
+
+    if (!isValid(parsedEndDate)) {
+      return res.status(400).send({
+        error: `INVALID_END_DATE - Format ${DATE_FORMAT}`,
+      });
+    }
+
+    /** {raw: true} is used to remove contract.id from select clause. */
+
+    const result = await Job.findAll({
+      attributes: [[sequelize.fn("sum", sequelize.col("price")), "paid"]],
+      limit: limit || 2,
+      order: [["paid", "DESC"]],
+      group: ["Contract.ClientId"],
+      raw: true,
+      where: {
+        paid: true,
+        paymentDate: {
+          [Op.lte]: endOfDay(parsedEndDate),
+          [Op.gte]: startOfDay(parsedStartDate),
+        },
+      },
+      include: {
+        attributes: ["ClientId"],
+        model: Contract,
+        required: true,
+        include: {
+          attributes: ["firstName", "lastName", "id"],
+          model: Profile,
+          required: true,
+          as: "Client",
+        },
+      },
+    });
+
+    const parsedResponse = result.map((el) => {
+      return {
+        id: el["Contract.Client.id"],
+        fullName: `${el["Contract.Client.firstName"]} ${el["Contract.Client.lastName"]}`,
+        paid: el.paid,
+      };
+    });
+
+    res.status(200).json(parsedResponse);
+    return;
+  } catch (err) {
+    res.status(500).end();
+  }
+};
+
 module.exports = {
   getBestProfession,
+  getBestClients,
 };

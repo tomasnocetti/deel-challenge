@@ -61,12 +61,11 @@ const addToBalance = async (req, res) => {
 
       await profile.increment("balance", { by: 100, transaction: t });
     });
+    res.status(201).end();
   } catch (err) {
     res.status(500).end();
     return;
   }
-
-  res.status(201).end();
 };
 
 module.exports = {
