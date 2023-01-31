@@ -3,7 +3,7 @@ const router = express.Router();
 
 const { BalancesController } = require("../controllers");
 
-// router.post("/balances/deposit/:userId", BalancesController.deposit);
+router.post("/deposit/:userId", BalancesController.addToBalance);
 router.get("/:userId", BalancesController.getBalance);
 
 module.exports = router;

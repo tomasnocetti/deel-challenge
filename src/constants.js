@@ -4,6 +4,9 @@ const CONTRACT_STATUS = {
   NEW: "new",
 };
 
+const MAX_BALANCE_RATIO = 0.25;
+
 module.exports = {
   CONTRACT_STATUS,
+  MAX_BALANCE_RATIO,
 };

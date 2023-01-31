@@ -1,4 +1,5 @@
 const { Op } = require("sequelize");
+const { CONTRACT_STATUS } = require("../constants");
 
 const getUnpaidJobs = async (req, res) => {
   const { Job, Contract } = req.app.get("models");
@@ -13,6 +14,7 @@ const getUnpaidJobs = async (req, res) => {
         model: Contract,
         attributes: ["ContractorId", "ClientId"],
         where: {
+          status: CONTRACT_STATUS.IN_PROGRESS,
           [Op.or]: [
             { ClientId: req.profile.id },
             { ContractorId: req.profile.id },
