@@ -11,9 +11,7 @@ beforeAll(async () => {
 describe(`GET ${BASE_PATH}/:user_id`, () => {
   it("Should return the balance for a given user", async () => {
     const profileId = 1;
-    const res = await request(app).get(`${BASE_PATH}/1`).set({
-      profile_id: profileId,
-    });
+    const res = await request(app).get(`${BASE_PATH}/1`);
 
     expect(res.statusCode).toBe(200);
     const body = res.body;
@@ -25,9 +23,7 @@ describe(`POST ${BASE_PATH}/deposit/:userId`, () => {
   it("Should add 100 to balance", async () => {
     const profileId = 1;
     const balanceToAdd = 100;
-    const prevBalanceRes = await request(app).get(`${BASE_PATH}/1`).set({
-      profile_id: profileId,
-    });
+    const prevBalanceRes = await request(app).get(`${BASE_PATH}/1`);
 
     const prevBalance = prevBalanceRes.body.balance;
 
@@ -40,9 +36,7 @@ describe(`POST ${BASE_PATH}/deposit/:userId`, () => {
 
     expect(res.status).toBe(201);
 
-    const aftBalanceRes = await request(app).get(`${BASE_PATH}/1`).set({
-      profile_id: profileId,
-    });
+    const aftBalanceRes = await request(app).get(`${BASE_PATH}/1`);
     const aftBalance = aftBalanceRes.body.balance;
 
     expect(aftBalance).toBe(prevBalance + balanceToAdd);
@@ -51,9 +45,7 @@ describe(`POST ${BASE_PATH}/deposit/:userId`, () => {
   it("Should add another 100 to balance", async () => {
     const profileId = 1;
     const balanceToAdd = 100;
-    const prevBalanceRes = await request(app).get(`${BASE_PATH}/1`).set({
-      profile_id: profileId,
-    });
+    const prevBalanceRes = await request(app).get(`${BASE_PATH}/1`);
 
     const prevBalance = prevBalanceRes.body.balance;
 
@@ -66,9 +58,7 @@ describe(`POST ${BASE_PATH}/deposit/:userId`, () => {
 
     expect(res.status).toBe(201);
 
-    const aftBalanceRes = await request(app).get(`${BASE_PATH}/1`).set({
-      profile_id: profileId,
-    });
+    const aftBalanceRes = await request(app).get(`${BASE_PATH}/1`);
     const aftBalance = aftBalanceRes.body.balance;
 
     expect(aftBalance).toBe(prevBalance + balanceToAdd);

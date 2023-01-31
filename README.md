@@ -1,9 +1,5 @@
 # DEEL BACKEND TASK
 
-💫 Welcome! 🎉
-
-This backend exercise involves building a Node.js/Express.js app that will serve a REST API. We imagine you should spend around 3 hours at implement this feature.
-
 ## Data Models
 
 > **All models are defined in src/model.js**
@@ -24,20 +20,6 @@ Contracts group jobs within them.
 
 contractor get paid for jobs by clients under a certain contract.
 
-## Getting Set Up
-
-The exercise requires [Node.js](https://nodejs.org/en/) to be installed. We recommend using the LTS version.
-
-1. Start by cloning this repository.
-
-1. In the repo root directory, run `npm install` to gather all dependencies.
-
-1. Next, `npm run seed` will seed the local SQLite database. **Warning: This will drop the database if it exists**. The database lives in a local file `database.sqlite3`.
-
-1. Then run `npm start` which should start both the server and the React client.
-
-❗️ **Make sure you commit all changes to the master branch!**
-
 ## Technical Notes
 
 - The server is running with [nodemon](https://nodemon.io/) which will automatically restart for you when you modify and save a file.
@@ -51,17 +33,23 @@ The exercise requires [Node.js](https://nodejs.org/en/) to be installed. We reco
 
 Below is a list of the required API's for the application.
 
-1. **_GET_** `/contracts/:id` - This API is broken 😵! it should return the contract only if it belongs to the profile calling. better fix that!
+1. **_GET_** `/contracts/:id` Returns the contract only if it belongs to the profile calling.
 
 1. **_GET_** `/contracts` - Returns a list of contracts belonging to a user (client or contractor), the list should only contain non terminated contracts.
 
-1. **_GET_** `/jobs/unpaid` - Get all unpaid jobs for a user (**_either_** a client or contractor), for **_active contracts only_**.
+1. **_GET_** `/jobs/unpaid` - Get all unpaid jobs for a user (**_either_** a client or contractor), for **_active contracts only_**. The user is the associated with the profile_id header.
 
-1. **_POST_** `/jobs/:job_id/pay` - Pay for a job, a client can only pay if his balance >= the amount to pay. The amount should be moved from the client's balance to the contractor balance.
+1. **_POST_** `/jobs/:job_id/pay` - Pay for a job, a client can only pay if his balance >= the amount to pay. The amount should be moved from the client's balance to the contractor balance. The paying user is the associated with the profile_id header.
 
 1. **_POST_** `/balances/deposit/:userId` - Deposits money into the the the balance of a client, a client can't deposit more than 25% his total of jobs to pay. (at the deposit moment)
 
-1. **_GET_** `/admin/best-profession?start=<date>&end=<date>` - Returns the profession that earned the most money (sum of jobs paid) for any contactor that worked in the query time range.
+1. **_GET_** `/admin/best-profession?start=<date>&end=<date>` - Returns the profession that earned the most money (sum of jobs paid) for any contactor that worked in the query time range. Eg:
+
+```
+GET admin/best-profession?start=2020-01-03&end=2022-01-03
+
+{"earnings":2020,"profession":"Programmer"}
+```
 
 1. **_GET_** `/admin/best-clients?start=<date>&end=<date>&limit=<integer>` - returns the clients the paid the most for jobs in the query time period. limit query parameter should be applied, default limit is 2.
 
@@ -85,19 +73,15 @@ Below is a list of the required API's for the application.
 ]
 ```
 
-## Going Above and Beyond the Requirements
-
-Given the time expectations of this exercise, we don't expect anyone to submit anything super fancy, but if you find yourself with extra time, any extra credit item(s) that showcase your unique strengths would be awesome! 🙌
-
-It would be great for example if you'd write some unit test / simple frontend demostrating calls to your fresh APIs.
-
-## Submitting the Assignment
-
-When you have finished the assignment, create a github repository and send us the link.
-
-Thank you and good luck! 🙏
-
 # Resolution
+
+## Run
+
+To start the server you need to run.
+
+```
+npm start
+```
 
 ## Tests
 
@@ -107,12 +91,12 @@ Tests serve as documentation for this endpoints, a whole suite of tests have bee
 npm run test
 ```
 
-Tests are located under `/tests` folder.
+Tests are located under `/tests` folder. There is a test coverage of %94.84.
 
 ## Assumptions
 
 - If the profileId in `/contracts/:id` doesn't match the contracts associated profile, we return 404.
-- For both **_GET_** `/jobs/unpaid` and **_POST_** `/jobs/:job_id/pay` the user is taken from getProfile middleware.
+- For both **_GET_** `/jobs/unpaid` and **_POST_** `/jobs/:job_id/pay` the user for the action is taken from getProfile middleware.
 - In the operation **_POST_** `/balances/deposit/:userId`, the deposit action is considered when calling the endpoint, there's no restriction over the total balance of the client. Also a payload definition needs to be sent with the amount to deposit. Eg:
 
 ```

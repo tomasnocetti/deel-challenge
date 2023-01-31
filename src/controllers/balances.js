@@ -47,7 +47,7 @@ const addToBalance = async (req, res) => {
         },
         include: {
           model: Contract,
-          where: { ClientId: req.profile.id },
+          where: { ClientId: userId },
         },
         transaction: t,
       });

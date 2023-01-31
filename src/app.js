@@ -14,7 +14,7 @@ app.set("models", sequelize.models);
 
 app.use("/contracts", getProfile, contracts);
 app.use("/jobs", getProfile, jobs);
-app.use("/balances", getProfile, balances);
+app.use("/balances", balances);
 app.use("/admin", admin);
 
 module.exports = app;

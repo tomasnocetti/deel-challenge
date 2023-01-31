@@ -7,10 +7,10 @@ const getBestProfession = async (req, res) => {
     const { Profile, Job, Contract } = req.app.get("models");
     const sequelize = req.app.get("sequelize");
 
-    const { start_date, end_date } = req.query;
+    const { start, end } = req.query;
 
-    const parsedStartDate = parse(start_date, DATE_FORMAT, new Date());
-    const parsedEndDate = parse(end_date, DATE_FORMAT, new Date());
+    const parsedStartDate = parse(start, DATE_FORMAT, new Date());
+    const parsedEndDate = parse(end, DATE_FORMAT, new Date());
 
     if (!isValid(parsedStartDate)) {
       return res.status(400).send({
@@ -67,10 +67,10 @@ const getBestClients = async (req, res) => {
     const { Profile, Job, Contract } = req.app.get("models");
     const sequelize = req.app.get("sequelize");
 
-    const { start_date, end_date, limit } = req.query;
+    const { start, end, limit } = req.query;
 
-    const parsedStartDate = parse(start_date, DATE_FORMAT, new Date());
-    const parsedEndDate = parse(end_date, DATE_FORMAT, new Date());
+    const parsedStartDate = parse(start, DATE_FORMAT, new Date());
+    const parsedEndDate = parse(end, DATE_FORMAT, new Date());
 
     if (!isValid(parsedStartDate)) {
       return res.status(400).send({
