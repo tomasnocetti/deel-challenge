@@ -27,7 +27,10 @@ const getNonTerminatedContracts = async (req, res) => {
   const { Contract } = req.app.get("models");
 
   const contracts = await Contract.findAll({
-    where: { ClientId: req.profile.id, status: CONTRACT_STATUS.IN_PROGRESS },
+    where: {
+      [Op.or]: [{ ClientId: req.profile.id }, { ContractorId: req.profile.id }],
+      status: CONTRACT_STATUS.IN_PROGRESS,
+    },
   });
 
   res.json(contracts);

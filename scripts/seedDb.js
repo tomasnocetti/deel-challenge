@@ -74,6 +74,14 @@ async function seed() {
       balance: 314,
       type: "contractor",
     }),
+    Profile.create({
+      id: 9,
+      firstName: "Charles",
+      lastName: "Chaplin",
+      profession: "Actor",
+      balance: 0,
+      type: "contractor",
+    }),
     Contract.create({
       id: 1,
       terms: "bla bla bla",

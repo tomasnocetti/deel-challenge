@@ -53,7 +53,7 @@ describe(`GET ${BASE_PATH}/:id`, () => {
 });
 
 describe(`GET ${BASE_PATH}`, () => {
-  it("Should return all non terminated contracts for a user with contracts", async () => {
+  it("Should return all non terminated contracts for a user with contracts as Client", async () => {
     const profileId = 1;
 
     const res = await request(app).get(`${BASE_PATH}`).set({
@@ -62,13 +62,33 @@ describe(`GET ${BASE_PATH}`, () => {
 
     expect(res.statusCode).toBe(200);
     const contracts = res.body;
+    expect(contracts.length).toBeGreaterThan(0);
+
     contracts.forEach((contract) => {
+      expect(contract.ClientId).toBe(profileId);
+      expect(contract.status).toBe(CONTRACT_STATUS.IN_PROGRESS);
+    });
+  });
+
+  it("Should return all non terminated contracts for a user with contracts as Contractor", async () => {
+    const profileId = 6;
+
+    const res = await request(app).get(`${BASE_PATH}`).set({
+      profile_id: profileId,
+    });
+
+    expect(res.statusCode).toBe(200);
+    const contracts = res.body;
+    expect(contracts.length).toBeGreaterThan(0);
+
+    contracts.forEach((contract) => {
+      expect(contract.ContractorId).toBe(profileId);
       expect(contract.status).toBe(CONTRACT_STATUS.IN_PROGRESS);
     });
   });
 
   it("Should return no contracts for a user with no contracts", async () => {
-    const profileId = 6;
+    const profileId = 9;
 
     const res = await request(app).get(`${BASE_PATH}`).set({
       profile_id: profileId,
