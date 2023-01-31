@@ -5,8 +5,9 @@ const CONTRACT_STATUS = {
 };
 
 const MAX_BALANCE_RATIO = 0.25;
-
+const DATE_FORMAT = "yyyy-MM-dd";
 module.exports = {
   CONTRACT_STATUS,
   MAX_BALANCE_RATIO,
+  DATE_FORMAT,
 };
