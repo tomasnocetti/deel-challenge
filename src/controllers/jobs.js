@@ -6,10 +6,13 @@ const getUnpaidJobs = async (req, res) => {
   try {
     const jobs = await Job.findAll({
       where: {
-        paid: false,
+        paid: {
+          [Op.not]: true,
+        },
       },
       include: {
         model: Contract,
+        attributes: ["ContractorId", "ClientId"],
         where: {
           status: CONTRACT_STATUS.IN_PROGRESS,
           [Op.or]: [

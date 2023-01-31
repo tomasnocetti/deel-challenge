@@ -1,8 +1,5 @@
 const { Profile, Contract, Job } = require("../src/model");
 
-/* WARNING THIS WILL DROP THE CURRENT DATABASE */
-seed();
-
 async function seed() {
   // create tables
   await Profile.sync({ force: true });
@@ -236,9 +233,18 @@ async function seed() {
     Job.create({
       description: "work",
       price: 121,
-      paid: false,
       paymentDate: "2020-08-14T23:11:27.737Z",
       ContractId: 2,
     }),
   ]);
 }
+
+/* WARNING THIS WILL DROP THE CURRENT DATABASE */
+
+if (require.main === module) {
+  seed();
+}
+
+module.exports = {
+  seed,
+};

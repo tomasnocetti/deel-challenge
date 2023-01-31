@@ -15,8 +15,8 @@ describe(`GET ${BASE_PATH}/unpaid`, () => {
     expect(jobs.length).toBeGreaterThan(0);
 
     jobs.forEach((contract) => {
-      // expect(contract.ContractorId).toBe(profileId);
-      expect(contract.paid).toBe(false);
+      expect(contract?.Contract.ClientId).toBe(profileId);
+      expect(contract.paid).not.toBe(true);
     });
   });
   it("Should return all unpaid jobs for a given Profile with unpaid jobs as Contractor", async () => {
@@ -30,12 +30,12 @@ describe(`GET ${BASE_PATH}/unpaid`, () => {
     expect(jobs.length).toBeGreaterThan(0);
 
     jobs.forEach((contract) => {
-      // expect(contract.ContractorId).toBe(profileId);
-      expect(contract.paid).toBe(false);
+      expect(contract?.Contract.ContractorId).toBe(profileId);
+      expect(contract.paid).not.toBe(true);
     });
   });
   it("Should return no jobs for a given Profile with no unpaid Jobs", async () => {
-    const profileId = 2;
+    const profileId = 8;
     const res = await request(app).get(`${BASE_PATH}/unpaid`).set({
       profile_id: profileId,
     });
