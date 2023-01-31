@@ -2,8 +2,8 @@ const { Op } = require("sequelize");
 const { CONTRACT_STATUS } = require("../constants");
 
 const getUnpaidJobs = async (req, res) => {
-  const { Job, Contract } = req.app.get("models");
   try {
+    const { Job, Contract } = req.app.get("models");
     const jobs = await Job.findAll({
       where: {
         paid: {
@@ -31,10 +31,11 @@ const getUnpaidJobs = async (req, res) => {
 };
 
 const payForJob = async (req, res) => {
-  const { Job, Contract, Profile } = req.app.get("models");
-  const sequelize = req.app.get("sequelize");
-  const { job_id } = req.params;
   try {
+    const { Job, Contract, Profile } = req.app.get("models");
+    const sequelize = req.app.get("sequelize");
+    const { job_id } = req.params;
+
     const job = await Job.findOne({
       where: {
         paid: {

@@ -29,9 +29,7 @@ contractor get paid for jobs by clients under a certain contract.
 - To authenticate users use the `getProfile` middleware that is located under src/middleware/getProfile.js. users are authenticated by passing `profile_id` in the request header. after a user is authenticated his profile will be available under `req.profile`. make sure only users that are on the contract can access their contracts.
 - The server is running on port 3001.
 
-## APIs To Implement
-
-Below is a list of the required API's for the application.
+## APIs Implemented
 
 1. **_GET_** `/contracts/:id` Returns the contract only if it belongs to the profile calling.
 
@@ -117,3 +115,4 @@ POST /balances/deposit/1
 - For production software it would be nice to implement clustering.
 - Adding Swagger style documentation would be a really nice-to have for this project.
 - Some validations have been created, and some are missing. There were no requirements on validations so this was up to the programmer to decide.
+- Error handling can be improved acrossed the app.
