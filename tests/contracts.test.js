@@ -1,8 +1,13 @@
 const request = require("supertest");
 const app = require("../src/app");
 const { CONTRACT_STATUS } = require("../src/constants");
+const { seed } = require("../scripts/seedDb");
 
 const BASE_PATH = "/contracts";
+
+beforeAll(async () => {
+  await seed();
+});
 
 describe(`GET ${BASE_PATH}/:id`, () => {
   it("Should return a contract if the user.id is ClientId", async () => {
