@@ -10,7 +10,7 @@ const CONTRACT_STATUS = {
 };
 
 describe(`GET ${BASE_PATH}/:id`, () => {
-  it("Should return a contract if the user is valid", async () => {
+  it("Should return a contract if the user.id is ClientId", async () => {
     const contractId = 1;
     const profileId = 1;
 
@@ -18,8 +18,19 @@ describe(`GET ${BASE_PATH}/:id`, () => {
       profile_id: profileId,
     });
     expect(res.statusCode).toBe(200);
-    expect(res.body.id === contractId);
-    expect(res.body.ClientId === profileId);
+    expect(res.body.id).toBe(contractId);
+    expect(res.body.ClientId).toBe(profileId);
+  });
+  it("Should return a contract if the user.id is ContractorId", async () => {
+    const contractId = 1;
+    const profileId = 5;
+
+    const res = await request(app).get(`${BASE_PATH}/${contractId}`).set({
+      profile_id: profileId,
+    });
+    expect(res.statusCode).toBe(200);
+    expect(res.body.id).toBe(contractId);
+    expect(res.body.ContractorId).toBe(profileId);
   });
 
   it("Should return 404 if the profile doesn't match the Contract Profile Id", async () => {

@@ -1,3 +1,5 @@
+const { Op } = require("sequelize");
+
 const CONTRACT_STATUS = {
   TERMINATED: "terminated",
   IN_PROGRESS: "in_progress",
@@ -9,7 +11,10 @@ const getContract = async (req, res) => {
   const { id } = req.params;
 
   const contract = await Contract.findOne({
-    where: { id, ClientId: req.profile.id },
+    where: {
+      id,
+      [Op.or]: [{ ClientId: req.profile.id }, { ContractorId: req.profile.id }],
+    },
   });
 
   if (!contract) return res.status(404).end();
