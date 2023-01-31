@@ -116,3 +116,4 @@ POST /balances/deposit/1
 - Adding Swagger style documentation would be a really nice-to have for this project.
 - Some validations have been created, and some are missing. There were no requirements on validations so this was up to the programmer to decide.
 - Error handling can be improved acrossed the app.
+- Check for CORS and Security meassures.

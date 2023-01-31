@@ -1,11 +1,13 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const helmet = require("helmet");
 
 const { getProfile } = require("./middleware/getProfile");
 const { contracts, jobs, balances, admin } = require("./routes");
 const { sequelize } = require("./model");
 
 const app = express();
+app.use(helmet());
 
 app.use(bodyParser.json());
 
