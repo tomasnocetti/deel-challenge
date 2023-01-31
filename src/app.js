@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 
 const { getProfile } = require("./middleware/getProfile");
-const { contracts, jobs } = require("./routes");
+const { contracts, jobs, balances } = require("./routes");
 const { sequelize } = require("./model");
 
 const app = express();
@@ -14,5 +14,6 @@ app.set("models", sequelize.models);
 
 app.use("/contracts", getProfile, contracts);
 app.use("/jobs", getProfile, jobs);
+app.use("/balances", getProfile, balances);
 
 module.exports = app;
