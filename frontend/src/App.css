@@ -1,0 +1,29 @@
+/* CSS Simple Pre Code */
+pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow: auto;
+}
+
+pre.code {
+  margin: 20px 25px;
+  border-radius: 4px;
+
+  position: relative;
+}
+
+pre.code label {
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 13px;
+  color: #ddd;
+  position: absolute;
+  left: 1px;
+  top: 15px;
+  text-align: center;
+  width: 60px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  pointer-events: none;
+}
