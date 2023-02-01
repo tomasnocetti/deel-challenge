@@ -53,7 +53,7 @@ const payForJob = async (req, res) => {
     });
 
     if (!job) {
-      return res.status(404).end();
+      return res.status(404).json({});
     }
 
     const contractor = await Profile.findOne({
@@ -78,7 +78,7 @@ const payForJob = async (req, res) => {
       );
     });
 
-    res.status(201).end();
+    res.status(201).json({});
     return;
   } catch (err) {
     console.log(err);

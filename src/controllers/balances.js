@@ -12,7 +12,7 @@ const getBalance = async (req, res) => {
       },
     });
 
-    if (!profile) return res.status(404).end();
+    if (!profile) return res.status(404).json({});
 
     res.json({
       balance: profile.balance,
@@ -58,14 +58,14 @@ const addToBalance = async (req, res) => {
 
       if (unpaidTotal * MAX_BALANCE_RATIO < balanceToAdd) {
         res.status(400).json({
-          error: "INVALID_BALANCE_DEPOSIT",
+          error: "INVALID_AMOUNT_TO_DEPOSIT",
         });
         return;
       }
 
       await profile.increment("balance", { by: 100, transaction: t });
     });
-    res.status(201).end();
+    res.status(201).json({});
   } catch (err) {
     res.status(500).end();
     return;

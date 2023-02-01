@@ -16,7 +16,7 @@ const getContract = async (req, res) => {
       },
     });
 
-    if (!contract) return res.status(404).end();
+    if (!contract) return res.status(404).json({});
 
     res.json(contract);
     return;
