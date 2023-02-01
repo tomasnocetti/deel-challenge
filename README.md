@@ -78,6 +78,7 @@ GET admin/best-profession?start=2020-01-03&end=2022-01-03
 To start the server you need to run.
 
 ```
+npm install 
 npm start
 ```
 
@@ -90,6 +91,11 @@ npm run test
 ```
 
 Tests are located under `/tests` folder. There is a test coverage of %94.84.
+
+## Frontend
+
+A simple frontend for testing the Server can be found under `/frontend`, instructions on how to run it are located in the README.
+
 
 ## Assumptions
 
