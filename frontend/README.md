@@ -7,6 +7,7 @@ This is an extremely rudimentary frontend to help testing of the DEEL Backend Ta
 To get started simply run
 
 ```
+npm install 
 npm start
 ```
 
