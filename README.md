@@ -121,5 +121,5 @@ POST /balances/deposit/1
 - For production software it would be nice to implement clustering.
 - Adding Swagger style documentation would be a really nice-to have for this project.
 - Some validations have been created, and some are missing. There were no requirements on validations so this was up to the programmer to decide.
-- Error handling can be improved acrossed the app.
+- Error handling can be improved throughout the app.
 - Check for CORS and Security meassures.
